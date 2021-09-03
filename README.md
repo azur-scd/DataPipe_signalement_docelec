@@ -39,6 +39,7 @@ stateDiagram
 
 * Doc sur MarcEdit + installation : [https://marcedit.reeset.net/downloads](https://marcedit.reeset.net/downloads)
 * Doc MarcEdit sur l'ajout simple d'une XSLT [https://marcedit.reeset.net/software/xslt/load.txt](https://marcedit.reeset.net/software/xslt/load.txt)
+* Localiser l'emplacement des fichiers de son instance MarcEdit déjà installée : lancer le logiciel -> cliquer sur l'écrou en bas à droite de la fenêtre -> cliquer sur Locations dans le bandeau gauche
 
 ### Ajouter les feuilles XSLT du repo dans son install MarcEdit locale 
 
