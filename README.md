@@ -10,6 +10,8 @@ Les sources de données ayant donné lieu au paramétrage de pipes de moissonnag
 
  ## Remarques générales sur le circuit complet de signalement pour les ebooks
 
+ *Les feuilles de style dédiées sont dans le dossier /ebooks du repositery.*
+
  Le workflow général quelle que soit la source de données consiste à aboutir à un fichier Unimarc xml prêt à être chargé dans Primo
 
 ```mermaid
@@ -28,13 +30,21 @@ stateDiagram
 
  Pour voir la doc détaillée des workflow source par source : [https://wiki.univ-cotedazur.fr/display/SCDSIGB/Ebooks+dans+Primo](https://wiki.univ-cotedazur.fr/display/SCDSIGB/Ebooks+dans+Primo)
 
- ### Remarques sur les config MarcEdit
-
-1. Doc sur MarcEdit : [https://marcedit.reeset.net/downloads](https://marcedit.reeset.net/downloads)
-
-2. Ajouter une feuille XSLT dans son instll MarcEdit locale : [https://marcedit.reeset.net/software/xslt/load.txt](https://marcedit.reeset.net/software/xslt/load.txt)
-
-3. Si la feuille de style utilise des fonctions spécifiques à la v2 XSLT, choisir le processeur Saxon lors de l'ajout dans le panneau d'édition de la config de MarcEdit (le processeur par défaut MSXML est compatible uniquement v1).
-**Le processeur à privilégier est mentionné en commentaire au début de chaque fichier xsl**
 
 ## Remarques générales sur le circuit complet de signalement pour les revues en ligne (source FTF)
+
+*Les feuilles de style dédiées sont dans le dossier /atoz du repositery.*
+
+## Remarques générales sur la config de MarcEdit
+
+* Doc sur MarcEdit + installation : [https://marcedit.reeset.net/downloads](https://marcedit.reeset.net/downloads)
+* Doc MarcEdit sur l'ajout simple d'une XSLT [https://marcedit.reeset.net/software/xslt/load.txt](https://marcedit.reeset.net/software/xslt/load.txt)
+
+### Ajouter les feuilles XSLT du repo dans son install MarcEdit locale 
+
+1. Copier/coller les 2 dossiers /ebooks et /atoz dans $MARCEDIT_HOME/xslt
+
+2. Si la feuille de style utilise des fonctions spécifiques à la v2 XSLT, choisir le processeur Saxon lors de l'ajout dans le panneau d'édition de la config de MarcEdit (le processeur par défaut MSXML est compatible uniquement v1).
+**Le processeur à privilégier est mentionné en commentaire au début de chaque fichier xsl**
+
+3. Créer les nouvelles tâches dans .... et leur associer la feuille de style qui correspond
