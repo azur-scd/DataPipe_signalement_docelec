@@ -1,0 +1,83 @@
+Sub import_txt_source_file()
+'
+' import_txt_source_file Macro
+'
+
+'
+    With ActiveSheet.QueryTables.Add(Connection:= _
+        "TEXT;C:\Users\BUNICE\Downloads\rsc_txt.txt", Destination:=Range("$A$1"))
+        .Name = "rsc_txt"
+        .FieldNames = True
+        .RowNumbers = False
+        .FillAdjacentFormulas = False
+        .PreserveFormatting = True
+        .RefreshOnFileOpen = False
+        .RefreshStyle = xlInsertDeleteCells
+        .SavePassword = False
+        .SaveData = True
+        .AdjustColumnWidth = True
+        .RefreshPeriod = 0
+        .TextFilePromptOnRefresh = False
+        .TextFilePlatform = 1252
+        .TextFileStartRow = 1
+        .TextFileParseType = xlDelimited
+        .TextFileTextQualifier = xlTextQualifierDoubleQuote
+        .TextFileConsecutiveDelimiter = False
+        .TextFileTabDelimiter = True
+        .TextFileSemicolonDelimiter = False
+        .TextFileCommaDelimiter = False
+        .TextFileSpaceDelimiter = False
+        .TextFileColumnDataTypes = Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+        .TextFileTrailingMinusNumbers = True
+        .Refresh BackgroundQuery:=False
+    End With
+End Sub
+
+
+Sub process()
+'
+' process Macro
+'
+    Columns("AB:AN").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("U:Z").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("T:T").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("P:Q").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("J:K").Select
+    Range("K1").Activate
+    Selection.Delete Shift:=xlToLeft
+    Columns("H:H").Select
+    Selection.Delete Shift:=xlToLeft
+
+End Sub
+
+Sub copy()
+'
+' copy Macro
+'
+    Cells.Select
+    Selection.Copy
+    Sheets.Add After:=ActiveSheet
+    Cells.Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Application.CutCopyMode = True
+
+End Sub
+
+Sub map()
+'
+' map Macro
+'
+ ActiveWorkbook.XmlMaps.Add( _
+        "C:\Users\BUNICE\Desktop\temp\atoz_xml_workflow\mappage_atoz.xsd", "Resources") _
+        .Name = "Resources_Mappage"
+ ActiveWorkbook.XmlMaps("Resources_Mappage").Export URL:= _
+        "C:\Users\BUNICE\Desktop\temp\atoz_xml_workflow\export.xml", _
+         Overwrite:=True
+
+End Sub
