@@ -1,11 +1,11 @@
-Sub import_txt_source_file()
+Sub import_process()
 '
-' import_txt_source_file Macro
+' import_process Macro
 '
 
 '
     With ActiveSheet.QueryTables.Add(Connection:= _
-        "TEXT;C:\Users\BUNICE\Downloads\rsc_txt.txt", Destination:=Range("$A$1"))
+        "TEXT;C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\rsc_txt.txt", Destination:=Range("$A$1"))
         .Name = "rsc_txt"
         .FieldNames = True
         .RowNumbers = False
@@ -32,14 +32,8 @@ Sub import_txt_source_file()
         .TextFileTrailingMinusNumbers = True
         .Refresh BackgroundQuery:=False
     End With
-End Sub
-
-
-Sub process()
-'
-' process Macro
-'
-    Columns("AB:AN").Select
+	
+	 Columns("AB:AN").Select
     Selection.Delete Shift:=xlToLeft
     Columns("U:Z").Select
     Selection.Delete Shift:=xlToLeft
@@ -52,12 +46,11 @@ Sub process()
     Selection.Delete Shift:=xlToLeft
     Columns("H:H").Select
     Selection.Delete Shift:=xlToLeft
-
 End Sub
 
-Sub copy()
+Sub copy_map()
 '
-' copy Macro
+' copy_map Macro
 '
     Cells.Select
     Selection.Copy
@@ -66,18 +59,42 @@ Sub copy()
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False
     Application.CutCopyMode = True
-
-End Sub
-
-Sub map()
-'
-' map Macro
-'
- ActiveWorkbook.XmlMaps.Add( _
-        "C:\Users\BUNICE\Desktop\temp\atoz_xml_workflow\mappage_atoz.xsd", "Resources") _
+	
+	ActiveWorkbook.XmlMaps.Add( _
+        "C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\mappage_atoz.xsd", "Resources") _
         .Name = "Resources_Mappage"
- ActiveWorkbook.XmlMaps("Resources_Mappage").Export URL:= _
-        "C:\Users\BUNICE\Desktop\temp\atoz_xml_workflow\export.xml", _
-         Overwrite:=True
 
 End Sub
+
+Sub export()
+'
+' export Macro
+'
+Dim mapProperties As XmlMap 
+Dim pathProperties As String
+
+pathProperties = "C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\rsc_export.xml"
+Set mapProperties = ActiveWorkbook.XmlMaps("Resources_Mappage")
+If mapProperties.IsExportable Then mapProperties.Export URL:=pathProperties, Overwrite:=True
+
+End Sub
+
+Sub XSLTransform()
+On Error GoTo ErrHandle
+    Dim xmldoc As New MSXML2.DOMDocument, xslDoc As New MSXML2.DOMDocument
+    Dim newDoc As New MSXML2.DOMDocument
+
+    ' LOAD XML AND XSL FILES
+    xmlDoc.async = False
+    xmlDoc.Load "C:\Path\To\InputXML.xml"
+
+    xslDoc.async = False    
+    xslDoc.Load "C:\Path\To\XSLT_Script.xml"        
+
+    ' TRANSFORM XML 
+    xmldoc.transformNodeToObject xslDoc, newDoc
+    newDoc.Save "C:\Path\To\OutputXML.xml"
+
+    Set xmlDoc = Nothing: Set xslDoc = Nothing: Set newDoc = Nothing
+End Sub
+
