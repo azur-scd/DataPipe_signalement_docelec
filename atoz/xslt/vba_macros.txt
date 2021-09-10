@@ -5,7 +5,7 @@ Sub import_process()
 
 '
     With ActiveSheet.QueryTables.Add(Connection:= _
-        "TEXT;C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\rsc_txt.txt", Destination:=Range("$A$1"))
+        "TEXT;C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\files\rsc_txt.txt", Destination:=Range("$A$1"))
         .Name = "rsc_txt"
         .FieldNames = True
         .RowNumbers = False
@@ -30,7 +30,7 @@ Sub import_process()
         .TextFileColumnDataTypes = Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
         .TextFileTrailingMinusNumbers = True
-        .Refresh BackgroundQuery:=False
+        .Refresh BackgroundQuery:=True
     End With
 	
 	 Columns("AB:AN").Select
@@ -46,11 +46,12 @@ Sub import_process()
     Selection.Delete Shift:=xlToLeft
     Columns("H:H").Select
     Selection.Delete Shift:=xlToLeft
+
 End Sub
 
-Sub copy_map()
+Sub copy_format_map()
 '
-' copy_map Macro
+' copy_format_map Macro
 '
     Cells.Select
     Selection.Copy
@@ -60,8 +61,11 @@ Sub copy_map()
         :=False, Transpose:=False
     Application.CutCopyMode = True
 	
+	Columns("M:N").Select
+    Selection.NumberFormat = "yyyy-mm-dd"
+	
 	ActiveWorkbook.XmlMaps.Add( _
-        "C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\mappage_atoz.xsd", "Resources") _
+        "SCHEMA_XSD_PATH", "Resources") _
         .Name = "Resources_Mappage"
 
 End Sub
@@ -73,28 +77,9 @@ Sub export()
 Dim mapProperties As XmlMap 
 Dim pathProperties As String
 
-pathProperties = "C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\rsc_export.xml"
+pathProperties = "RESULT_XML_FILE_PATH"
 Set mapProperties = ActiveWorkbook.XmlMaps("Resources_Mappage")
 If mapProperties.IsExportable Then mapProperties.Export URL:=pathProperties, Overwrite:=True
 
-End Sub
-
-Sub XSLTransform()
-On Error GoTo ErrHandle
-    Dim xmldoc As New MSXML2.DOMDocument, xslDoc As New MSXML2.DOMDocument
-    Dim newDoc As New MSXML2.DOMDocument
-
-    ' LOAD XML AND XSL FILES
-    xmlDoc.async = False
-    xmlDoc.Load "C:\Path\To\InputXML.xml"
-
-    xslDoc.async = False    
-    xslDoc.Load "C:\Path\To\XSLT_Script.xml"        
-
-    ' TRANSFORM XML 
-    xmldoc.transformNodeToObject xslDoc, newDoc
-    newDoc.Save "C:\Path\To\OutputXML.xml"
-
-    Set xmlDoc = Nothing: Set xslDoc = Nothing: Set newDoc = Nothing
 End Sub
 
