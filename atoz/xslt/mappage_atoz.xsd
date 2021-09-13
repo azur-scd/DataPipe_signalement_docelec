@@ -1,35 +1,34 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:element name="Resources">
-		<xs:annotation>
-			<xs:documentation>AtoZ</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Resource" maxOccurs="unbounded">
-					<xs:complexType>
-						<xs:sequence>
-							<!--<xs:element name="LinkId" type="xs:integer" minOccurs="0" />-->
-							<xs:element name="ResourceId" type="xs:integer" minOccurs="0" />
-							<xs:element name="Title" type="xs:string" minOccurs="0" />
-							<xs:element name="TitleSort" type="xs:string" />
-							<xs:element name="Source" type="xs:string" />
-                <xs:element name="URL" type="xs:string" />
-							<xs:element name="ProxiedURL" type="xs:string" />
-							<xs:element name="Publisher" type="xs:string" />
-							 <xs:element name="Creator" type="xs:string" />
-							<xs:element name="PrintISSN" type="xs:string" />
-							<xs:element name="OnlineISSN" type="xs:string" />
-								<xs:element name="PrintISBN" type="xs:string" />
-							<xs:element name="OnlineISBN" type="xs:string" />
-							<xs:element name="ManagedCoverageBegin" type="xs:string" />
-							<xs:element name="ManagedCoverageEnd" type="xs:string" />
-							 <xs:element name="ResourceType" type="xs:string" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="Resources">
+    <xs:annotation>
+      <xs:documentation>AtoZ</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Resource" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <!--<xs:element name="LinkId" type="xs:integer" minOccurs="0" />-->
+              <xs:element name="ResourceId" type="xs:integer" minOccurs="0"/>
+              <xs:element name="Title" type="xs:string" minOccurs="0"/>
+              <xs:element name="TitleSort" type="xs:string"/>
+              <xs:element name="Source" type="xs:string"/>
+              <xs:element name="URL" type="xs:string"/>
+              <xs:element name="ProxiedURL" type="xs:string"/>
+              <xs:element name="Publisher" type="xs:string"/>
+              <xs:element name="Creator" type="xs:string"/>
+              <xs:element name="PrintISSN" type="xs:string"/>
+              <xs:element name="OnlineISSN" type="xs:string"/>
+              <xs:element name="PrintISBN" type="xs:string"/>
+              <xs:element name="OnlineISBN" type="xs:string"/>
+              <xs:element name="ManagedCoverageBegin" type="xs:date"/>
+              <xs:element name="ManagedCoverageEnd" type="xs:date"/>
+              <xs:element name="ResourceType" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

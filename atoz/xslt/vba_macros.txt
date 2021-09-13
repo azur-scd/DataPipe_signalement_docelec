@@ -1,39 +1,41 @@
-Sub import_process()
-'
-' import_process Macro
-'
-
-'
+Sub step1_import_process()
+    '
+    ' step1_import_process Macro
+    '   
+    '
+    Dim sourceTxtPath As String
+    sourceTxtPath = "FTF_EXPORT_TXT_FILE_PATH"
+	'examples "\\<IP_SERVER>\Folder1\Folder1.1\atoz_txt.txt" or "C:\Users\<USER>\Documents\Folder1\Folder1.1\atoz_txt.txt"
     With ActiveSheet.QueryTables.Add(Connection:= _
-        "TEXT;C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\files\rsc_txt.txt", Destination:=Range("$A$1"))
+         "TEXT;" & sourceTxtPath, Destination:=Range("$A$1"))
         .Name = "rsc_txt"
-        .FieldNames = True
-        .RowNumbers = False
-        .FillAdjacentFormulas = False
-        .PreserveFormatting = True
-        .RefreshOnFileOpen = False
+        .FieldNames = TRUE
+        .RowNumbers = FALSE
+        .FillAdjacentFormulas = FALSE
+        .PreserveFormatting = TRUE
+        .RefreshOnFileOpen = FALSE
         .RefreshStyle = xlInsertDeleteCells
-        .SavePassword = False
-        .SaveData = True
-        .AdjustColumnWidth = True
+        .SavePassword = FALSE
+        .SaveData = TRUE
+        .AdjustColumnWidth = TRUE
         .RefreshPeriod = 0
-        .TextFilePromptOnRefresh = False
+        .TextFilePromptOnRefresh = FALSE
         .TextFilePlatform = 1252
         .TextFileStartRow = 1
         .TextFileParseType = xlDelimited
         .TextFileTextQualifier = xlTextQualifierDoubleQuote
-        .TextFileConsecutiveDelimiter = False
-        .TextFileTabDelimiter = True
-        .TextFileSemicolonDelimiter = False
-        .TextFileCommaDelimiter = False
-        .TextFileSpaceDelimiter = False
+        .TextFileConsecutiveDelimiter = FALSE
+        .TextFileTabDelimiter = TRUE
+        .TextFileSemicolonDelimiter = FALSE
+        .TextFileCommaDelimiter = FALSE
+        .TextFileSpaceDelimiter = FALSE
         .TextFileColumnDataTypes = Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-        .TextFileTrailingMinusNumbers = True
+                                   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+        .TextFileTrailingMinusNumbers = TRUE
         .Refresh BackgroundQuery:=True
     End With
-	
-	 Columns("AB:AN").Select
+    
+    Columns("AB:AN").Select
     Selection.Delete Shift:=xlToLeft
     Columns("U:Z").Select
     Selection.Delete Shift:=xlToLeft
@@ -46,40 +48,42 @@ Sub import_process()
     Selection.Delete Shift:=xlToLeft
     Columns("H:H").Select
     Selection.Delete Shift:=xlToLeft
-
+    
 End Sub
 
-Sub copy_format_map()
-'
-' copy_format_map Macro
-'
+Sub step2_copy_format_map()
+    '
+    ' step2_copy_format_map Macro
+    '
     Cells.Select
     Selection.Copy
     Sheets.Add After:=ActiveSheet
     Cells.Select
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
-        :=False, Transpose:=False
-    Application.CutCopyMode = True
-	
-	Columns("M:N").Select
+                           :=False, Transpose:=False
+    Application.CutCopyMode = TRUE
+    
+    Columns("M:N").Select
     Selection.NumberFormat = "yyyy-mm-dd"
-	
-	ActiveWorkbook.XmlMaps.Add( _
-        "SCHEMA_XSD_PATH", "Resources") _
-        .Name = "Resources_Mappage"
-
+    
+    '   xsd mappage file already sourced in model excel file
+    '   ActiveWorkbook.XmlMaps.Add( _
+    '       "\\134.59.6.63\Doc Elec\Signalement\atoz\xslt\mappage_atoz.xsd", "Resources") _
+    '       .Name = "Resources_Mappage"
+    
 End Sub
 
-Sub export()
-'
-' export Macro
-'
-Dim mapProperties As XmlMap 
-Dim pathProperties As String
-
-pathProperties = "RESULT_XML_FILE_PATH"
-Set mapProperties = ActiveWorkbook.XmlMaps("Resources_Mappage")
-If mapProperties.IsExportable Then mapProperties.Export URL:=pathProperties, Overwrite:=True
-
+Sub step3_export()
+    '
+    ' step3_export Macro
+    '
+    Dim mapProperties As XmlMap
+    Dim xmlOutputPath As String
+    
+    xmlOutputPath = "OUTPUT_XML_FILE_PATH"
+	'examples "\\<IP_SERVER>\Folder1\Folder1.1\atoz_temp.xml" or "C:\Users\<USER>\Documents\Folder1\Folder1.1\atoz_temp.xml"
+    Set mapProperties = ActiveWorkbook.XmlMaps("Resources_Mappage")
+    If mapProperties.IsExportable Then mapProperties.Export URL:=xmlOutputPath, Overwrite:=True
+    
 End Sub
 
