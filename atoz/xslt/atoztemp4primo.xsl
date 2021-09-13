@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
-   <xsl:import href="file:///////C:/Users/BUNICE/Documents/GitHub/XSLT_signalement_docelec/atoz/xslt/tables_conversion.xsl"/>
+  <xsl:import href="../../xsltroot.xsl"/>
+   <xsl:import href="{$xsltroot/path[@name='xslt_folder']}/atoz/xslt/tables_conversion.xsl"/>
   <xsl:output method="xml" indent="yes"/>
    <xsl:strip-space elements="*"/>
    <!--variables de tables_conversion.xsl-->
