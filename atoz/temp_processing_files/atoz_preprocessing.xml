@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Resources>
+	<Resource>
+		<ResourceId/>
+		<Title/>
+		<TitleSort/>
+		<Source/>
+		<URL/>
+		<ProxiedURL/>
+		<Publisher/>
+		<Creator/>
+		<PrintISSN/>
+		<OnlineISSN/>
+		<PrintISBN/>
+		<OnlineISBN/>
+		<ManagedCoverageBegin/>
+		<ManagedCoverageEnd/>
+		<ResourceType/>
+	</Resource>
+</Resources>

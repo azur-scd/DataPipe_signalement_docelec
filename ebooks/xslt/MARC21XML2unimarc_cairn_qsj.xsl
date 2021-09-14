@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd" exclude-result-prefixes="marc">
   <xsl:import href="../../xsltroot.xsl"/>
   <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
-  <xsl:param name="xml_file_name" select="concat($root,'/','ebooks/cairn_qsj_',.substring(string(current-date()), 1, 10),'.xml')"/>
+  <xsl:param name="xml_file_name" select="concat($root,'/','ebooks/result_files/cairn_qsj_',.substring(string(current-date()), 1, 10),'.xml')"/>
   <xsl:param name="provider">Cairn</xsl:param>
   <xsl:template match="/*">
     <xsl:result-document href="{$xml_file_name}">

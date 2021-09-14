@@ -4,7 +4,7 @@
    <xsl:import href="tables_conversion.xsl"/>
   <xsl:output  method="xml" version="1.0" encoding="UTF-8" indent="yes" />
    <xsl:strip-space elements="*"/>
-   <xsl:param name="xml_file_name" select="concat($root,'/','atoz/atoz.xml')" />
+   <xsl:param name="xml_file_name" select="concat($root,'/atoz/result_files/atoz.xml')" />
    <!--variables de tables_conversion.xsl-->
      <xsl:variable name="all_specific_titles">
       <xsl:variable name="temp">~<xsl:for-each select="$specific/entry">
@@ -34,9 +34,9 @@
    </xsl:template>
   
    <xsl:template match="Resource">
-      <xsl:variable name="source" select="Source"/>
-      <xsl:variable name="title" select="Title"/>
-      <xsl:variable name="rtype" select="ResourceType" />
+      <xsl:variable name="source" select="normalize-space(Source)"/>
+      <xsl:variable name="title" select="normalize-space(Title)"/>
+      <xsl:variable name="rtype" select="normalize-space(ResourceType)" />
       <xsl:if test="$rtype != 'Report'">
       <xsl:copy>
          <xsl:apply-templates select="node()|@*"/>

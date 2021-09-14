@@ -1,0 +1,92 @@
+Sub step1_import_process()
+    '
+    ' step1_import_process Macro
+    '
+    '
+    Dim sourceTxtFolderPath As String
+    sourceTxtFolderPath = "C:\Users\geoffroy\Documents\GitHub\XSLT_signalement_docelec"
+    ' examples "\\<IP_SERVER>\Folder1\Folder1.1\" or "C:\Users\<USER>\Documents\Folder1\Folder1.1\"
+    ' the txt source file must be named atoz_export.txt
+    Range("A1").Select
+    With ActiveSheet.QueryTables.Add(Connection:= _
+        "TEXT;" & sourceTxtFolderPath & "\atoz\temp_processing_files\atoz_export.txt.txt" _
+        , Destination:=Range("$A$1"))
+        .Name = "atoz_export"
+        .FieldNames = True
+        .RowNumbers = False
+        .FillAdjacentFormulas = False
+        .PreserveFormatting = True
+        .RefreshOnFileOpen = False
+        .RefreshStyle = xlInsertDeleteCells
+        .SavePassword = False
+        .SaveData = True
+        .AdjustColumnWidth = True
+        .RefreshPeriod = 0
+        .TextFilePromptOnRefresh = False
+        .TextFilePlatform = 1252
+        .TextFileStartRow = 1
+        .TextFileParseType = xlDelimited
+        .TextFileTextQualifier = xlTextQualifierDoubleQuote
+        .TextFileConsecutiveDelimiter = False
+        .TextFileTabDelimiter = True
+        .TextFileSemicolonDelimiter = False
+        .TextFileCommaDelimiter = False
+        .TextFileSpaceDelimiter = False
+        .TextFileColumnDataTypes = Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, _
+                                   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+        .TextFileTrailingMinusNumbers = True
+        .Refresh BackgroundQuery:=False
+    End With
+    
+    Columns("AB:AN").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("U:Z").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("T:T").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("P:Q").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("J:K").Select
+    Range("K1").Activate
+    Selection.Delete Shift:=xlToLeft
+    Columns("H:H").Select
+    Selection.Delete Shift:=xlToLeft
+    
+End Sub
+
+Sub step2_copy_format_map()
+    '
+    ' step2_copy_format_map Macro
+    '
+    Cells.Select
+    Selection.Copy
+    Sheets.Add After:=ActiveSheet
+    Cells.Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+                           :=False, Transpose:=False
+    Application.CutCopyMode = True
+    
+    Columns("M:N").Select
+    Selection.NumberFormat = "yyyy-mm-dd"
+    
+    '   xsd mappage file already sourced in model excel file
+    '   ActiveWorkbook.XmlMaps.Add( _
+    '       "\\134.59.6.63\Doc Elec\Signalement\atoz\xslt\mappage_atoz.xsd", "Resources") _
+    '       .Name = "Resources_Mappage"
+    
+End Sub
+
+Sub step3_export()
+    '
+    ' step3_export Macro
+    '
+    Dim mapProperties As XmlMap
+    Dim xmlOutputPath As String
+    
+    xmlOutputFolderPath = "C:\Users\geoffroy\Documents\GitHub\XSLT_signalement_docelec"
+    ' examples "\\<IP_SERVER>\Folder1\Folder1.1\atoz_preprocess.xml" or "C:\Users\<USER>\Documents\Folder1\Folder1.1\atoz_preprocess.xml"
+    ' the output xml file will be names atoz_preprocess.xml
+    Set mapProperties = ActiveWorkbook.XmlMaps("Resources_Mappage")
+    If mapProperties.IsExportable Then mapProperties.export URL:=xmlOutputFolderPath & "\atoz\temp_processing_files\atoz_preprocessing.xml", Overwrite:=True
+    
+End Sub
