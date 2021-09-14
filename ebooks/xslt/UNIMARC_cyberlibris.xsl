@@ -9,7 +9,7 @@
                 version="2.0">
     <xsl:import href="../../xsltroot.xsl"/>
   <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
-  <xsl:param name="xml_file_name" select="concat($root,'/','ebooks/files/cyberlibris_',.substring(string(current-date()), 1, 10),'.xml')"/>
+  <xsl:param name="xml_file_name" select="concat($root,'/','ebooks/cyberlibris_',.substring(string(current-date()), 1, 10),'.xml')"/>
   <xsl:template match="/*">
    <xsl:result-document href="{$xml_file_name}">
     <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"

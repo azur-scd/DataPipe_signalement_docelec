@@ -376,6 +376,11 @@
 		<AccessType>1</AccessType>
 		<Note/>
 	</entry>
+	<entry>
+		<PackageName>Prairial Open Access</PackageName>
+		<AccessType>1</AccessType>
+		<Note/>
+	</entry>
 </xsl:variable>
 <xsl:variable name="specific">
 	<entry>
