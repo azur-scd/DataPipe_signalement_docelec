@@ -7,9 +7,12 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd"
                 version="2.0">
-  <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+ <xsl:import href="../../xsltroot.xsl"/>
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:param name="xml_file_name" select="concat($root,'/','ebooks/files/numilog_',.substring(string(current-date()), 1, 10),'.xml')"/>
   <xsl:strip-space elements="*"/>
   <xsl:template match="/*">
+  <xsl:result-document href="{$xml_file_name}">
        <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
@@ -29,6 +32,7 @@
           </xsl:for-each>
         </ListRecords>
       </OAI-PMH>
+      </xsl:result-document>
   </xsl:template>
   <xsl:template name="copyunimarc">
     <xsl:param name="isbn"/>

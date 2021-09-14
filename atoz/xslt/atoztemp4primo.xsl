@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
   <xsl:import href="../../xsltroot.xsl"/>
-   <xsl:import href="{$xsltroot/path[@name='xslt_folder']}/atoz/xslt/tables_conversion.xsl"/>
-  <xsl:output method="xml" indent="yes"/>
+   <xsl:import href="tables_conversion.xsl"/>
+  <xsl:output  method="xml" version="1.0" encoding="UTF-8" indent="yes" />
    <xsl:strip-space elements="*"/>
+   <xsl:param name="xml_file_name" select="concat($root,'/','atoz/files/atoz.xml')" />
    <!--variables de tables_conversion.xsl-->
      <xsl:variable name="all_specific_titles">
       <xsl:variable name="temp">~<xsl:for-each select="$specific/entry">
@@ -17,6 +18,14 @@
       </xsl:variable>
       <xsl:value-of select="normalize-space($temp)"/>
    </xsl:variable>
+   
+   <!--result-document template-->
+   <xsl:template match="/">
+  <xsl:result-document href="{$xml_file_name}">
+    <xsl:apply-templates/>
+  </xsl:result-document>
+</xsl:template>
+
    <!--identity template-->
    <xsl:template match="node()|@*">
      <xsl:copy>

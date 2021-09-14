@@ -5,7 +5,8 @@ Sub step1_import_process()
     '
     Dim sourceTxtPath As String
     sourceTxtPath = "FTF_EXPORT_TXT_FILE_PATH"
-	'examples "\\<IP_SERVER>\Folder1\Folder1.1\atoz_txt.txt" or "C:\Users\<USER>\Documents\Folder1\Folder1.1\atoz_txt.txt"
+	' examples "\\<IP_SERVER>\Folder1\Folder1.1\atoz_txt.txt" or "C:\Users\<USER>\Documents\Folder1\Folder1.1\atoz_txt.txt"
+	' the txt source file must be named atoz_txt.txt
     With ActiveSheet.QueryTables.Add(Connection:= _
          "TEXT;" & sourceTxtPath, Destination:=Range("$A$1"))
         .Name = "rsc_txt"
@@ -81,7 +82,8 @@ Sub step3_export()
     Dim xmlOutputPath As String
     
     xmlOutputPath = "OUTPUT_XML_FILE_PATH"
-	'examples "\\<IP_SERVER>\Folder1\Folder1.1\atoz_temp.xml" or "C:\Users\<USER>\Documents\Folder1\Folder1.1\atoz_temp.xml"
+	' examples "\\<IP_SERVER>\Folder1\Folder1.1\atoz_temp.xml" or "C:\Users\<USER>\Documents\Folder1\Folder1.1\atoz_temp.xml"
+	' the output xml file will be names atoz_temp.xml
     Set mapProperties = ActiveWorkbook.XmlMaps("Resources_Mappage")
     If mapProperties.IsExportable Then mapProperties.Export URL:=xmlOutputPath, Overwrite:=True
     
