@@ -73,5 +73,5 @@ stateDiagram
 4. nommer l'export xml atoz_preprocessing.xml et le déposer dans HOME/atoz/temp_processing_files
 5. Avec le jar saxon9he (se placer dans Kernow/lib) lancer en ligne de commande 
 ```
-java -jar saxon9he.jar C:\Users\geoffroy\Documents\GitHub\XSLT_signalement_docelec\atoz\temp_processing_files\atoz_preprocessing.xml C:\Users\geoffroy\Documents\GitHub\XSLT_signalement_docelec\atoz\xslt\atoztemp4primo.xsl
+java -jar "C:\Program Files\Kernow 1.8.0.1\lib\saxon9he.jar" -s:C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\temp_processing_files\atoz_export.xml -xsl:C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\xslt\atoztemp4primo.xsl -o:C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\result_files\atoz.xml
 ```

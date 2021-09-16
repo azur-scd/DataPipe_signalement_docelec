@@ -1,6 +1,4 @@
-atoz/temp_processing_files/atoz_export.txt
-atoz/temp_processing_files/atoz_preprocessing.xlsm
-atoz/temp_processing_files/atoz_processing.xml
-atoz/result_files/*
+atoz/atoz_export.*
+atoz/atoz.xml
 ebooks/result_files/*
 venv
