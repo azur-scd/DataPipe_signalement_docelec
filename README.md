@@ -1,5 +1,6 @@
 # XSLT_signalement_docelec
  Ce répertoire contient les différentes feuilles de style XSLT utilisées pour alimenter l'Opac (Primo) avec diverses sources de métadonnées de documentation électroniques.
+ L'ensemble des traitements appliqués aux fichiers source de métadonnées (nettoyage, conversion xsl) sont documentés et exécutables dans le Jupyter Noptebook execute_workflow.ipynb
 
 Les sources de données ayant donné lieu au paramétrage de pipes de moissonnage spécifiques et nécessitant un workflow de traitement en amont sont :
  - AtoZ : les métadonnées de revues électroniques (plus qqs bouquets d'ebooks) gérées dans Full Text Finder (Ebsco)
@@ -8,7 +9,11 @@ Les sources de données ayant donné lieu au paramétrage de pipes de moissonnag
  - Numilog : les acquisitions d'ebooks au titre à titre sur la plateforme Numilog
  - Springer bouquet Math & stats : les métadonnées d'ebooks des bouquets annuels Springer Math & stat (achat LJAD).
 
- ## Utilisation du dépôt
+## Utilisation du dépôt
+
+### Pré-requis
+
+En local : nécessite l'environnement Anaconda pour le notebook
 
 ### Installation
 

@@ -1,4 +1,5 @@
-atoz/atoz_export.*
-atoz/atoz.xml
-ebooks/result_files/*
-venv
+source_files_files/*
+temporary_files/*
+result_files/*
+venv_signalement
+.ipynb_checkpoints
