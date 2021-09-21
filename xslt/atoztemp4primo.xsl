@@ -93,12 +93,12 @@
       </xsl:if>
    </xsl:template>
 
-  <!-- remove elements -->
+     <!-- remove elements -->
   <xsl:template match="ManagedCoverageBegin"/>
   <xsl:template match="ManagedCoverageEnd"/>
   <xsl:template match="index"/>
   <xsl:template match="KBID"/>
-
+  
    <!--common template to manage date format-->
   <xsl:template name="coverage">
       <xsl:param name="date"/>
@@ -144,11 +144,5 @@
          </xsl:when>
       </xsl:choose>
       </xsl:template>
+
 </xsl:stylesheet>
-
-
-
-
-
-
-
