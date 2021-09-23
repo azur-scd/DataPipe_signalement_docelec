@@ -3,7 +3,7 @@
 :: saxon9he.jar must be installed
 
 :: USAGE:
-:: saxon.bat stylesheet.xsl source.xml output.xml x
+:: run_saxon.bat stylesheet.xsl source.xml output.xml x
 
 set STYLESHEET=%1
 set SOURCE=%2

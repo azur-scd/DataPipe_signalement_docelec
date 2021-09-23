@@ -1,49 +1,82 @@
 # XSLT_signalement_docelec
  Ce répertoire contient les différentes feuilles de style XSLT utilisées pour alimenter l'Opac (Primo) avec diverses sources de métadonnées de documentation électroniques.
- L'ensemble des traitements appliqués aux fichiers source de métadonnées (nettoyage, conversion xsl) sont documentés et exécutables dans le Jupyter Noptebook execute_workflow.ipynb
+ 
+ L'ensemble des traitements appliqués aux fichiers source de métadonnées (nettoyage, conversion xsl) sont exécutables dans le Jupyter Noptebook execute_workflow.ipynb ou être lancés en ligne de commande.
 
 Les sources de données ayant donné lieu au paramétrage de pipes de moissonnage spécifiques et nécessitant un workflow de traitement en amont sont :
- - AtoZ : les métadonnées de revues électroniques (plus qqs bouquets d'ebooks) gérées dans Full Text Finder (Ebsco)
+ - FTF : les métadonnées de revues électroniques (plus qqs bouquets d'ebooks) gérées dans Full Text Finder (Ebsco)
  - Cairn : les métadonnées d'ebooks du bouquet QSJ + les acquiisitions au titre à titre
  - Cyberlibris : les métadonnées d'ebooks du bouquet Cyberlibris
  - Numilog : les acquisitions d'ebooks au titre à titre sur la plateforme Numilog
  - Springer bouquet Math & stats : les métadonnées d'ebooks des bouquets annuels Springer Math & stat (achat LJAD).
+ 
+Installé sur dev-scd.unice.fr pour une utilisation distante mais peut être installé en local sur son PC (Windows)
 
-## Utilisation du dépôt
+## Installation locale
 
 ### Pré-requis
 
-En local : nécessite l'environnement Anaconda pour le notebook
+Python v3
 
-### Installation
+Nécessite l'environnement Anaconda pour ouvrir le notebook (facultatif)
+
+### Installation (Windows)
 
 Télécharger l'archive zippée ou cloner le dépôt depuis Github
+
 Installer le dossier n'importe où sur le PC
 
-### Paramétrage
+Il est en général conseillé de créer un environnement virtuel propre au projet afin d'isoler le binaire et les packages Python spécifiquement utilisés de l'environnement de base et éviter les conflits de version.
 
-Plusieurs variables et paramètres sont à personnaliser avant l'utilisation
-* dans HOME/xsltroot.xsl : mettre en valeur de la variable $root le path absolu du répertoire courant.
-* dans les macros du fichier Excel HOME/atoz/files/atoz_preprocessing.xslx : personnaliser les variables sourceTxtFolderPath et xmlOutputFolderPath avec ce même chemin.
+Se placer à la racine du dossier et lancer les commandes :
 
-### Usage
+```
+virtualenv NOM_DE_VOTRE_ENV # créé un environnement virtuel
+cd NOM_DE_VOTRE_ENV/Scripts + activate # active l'environnement virtuel
+pip install -r ../../requirements.txt # installe toutes les dépendances
+```
 
-Les différentes feuilles de style peuvent être lancées soit dans un processeur XSLT en standalone (par exemple Kernow), ou dans un éditeur XML intégrant un processeur (par ex Oxygen), ou encore être ajoutées dans le code d'uen instance locale du logiciel MarcEdit (option privilégiée afin de centraliser le maximum d'opérations dans un même outil).
+### Usage (en local et sur serveur distant si-scd.unice.fr)
 
-### Usage dans MarcEdit
+#### Dépôt du fichier de métadonnées à moissonner
 
-#### Remarques générales sur la config de MarcEdit
+Déposer le fichier source (issu de FTF ou Cairn ou Cyberlibris...) dans le dossier HOME/source_files/ (libellé du fichier indifférent)
 
-* Doc sur MarcEdit + installation : [https://marcedit.reeset.net/downloads](https://marcedit.reeset.net/downloads)
-* Doc MarcEdit sur l'ajout simple d'une XSLT [https://marcedit.reeset.net/software/xslt/load.txt](https://marcedit.reeset.net/software/xslt/load.txt)
-* Localiser l'emplacement des fichiers de son instance MarcEdit déjà installée : lancer le logiciel -> cliquer sur l'écrou en bas à droite de la fenêtre -> cliquer sur Locations dans le bandeau gauche
-* Ajouter une feuille de style directement dans son instance MarcEdit : déposer le fichier .xsl dans $MARCEDIT_HOME/xslt
+*Sur si-scd.unice.fr le chemin est /home/scd/DataHub_signalement_docelec/source-files/*
 
-#### Paramétrage des tâches
+#### CLI
 
-1. Créer les nouvelles tâches dans .... et leur associer la feuille de style qui correspond
+Se placer à la racine du dossier de fichier 
+*sur si-scd.unice.fr : cd /home/scd/DataHub_signalement_docelec*
 
-2. En général les feuilles de style proposées utilisent des fonctions spécifiques à la v2 XSLT, il est donc préférable de choisir systématiquement le processeur Saxon lors de l'ajout dans le panneau d'édition de la config de MarcEdit (le processeur par défaut MSXML est compatible uniquement v1).
+Et lancer le script execute_workflow avec les 2 paramètres attendus
+* -w:atoz|cairn_qsj|cairn_titre_a_titre|cyberlibris|numilog (au choix)
+* -f:<NOM_DU_FICHIER_DE_METADONNEES> 
+
+Exemples
+
+```
+python execute_workflow.py -w:ftf -f:ftf_source_records.csv
+python execute_workflow.py -w:numilog -f:numilog.xml
+```
+
+#### Notebook
+
+En plus de la CLI, les workflows peuvent être lancés depuis un formulaire construit avec des ipwidgets dans le Jupyter Notebook execute_workflow_ui.ipynb, ou encore depuis une mini-UI générée en surcouche du notebook grâce au package Voila.
+
+Pour ouvrir le notebook : passer par le navigateur Anaconda, lancer l'application Jupyter Lab et naviguer dans l'explorateur de fichier pour retrouver l'emplacement du notebokk (une fois ouvert et si besoin, changer le kernel actif)
+
+- notebook
+- voila
+
+### Fonctionnement
+
+Les différentes feuilles de style tournent avec le processeur XSLT Saxon installé en dur dans le dossier (HOME/saxon-he-9.4.0.7.jar)
+
+L'appel au processeur Saxon avec les différents paramètres de fichiers en fonction des workfloxs (paths des feuilles de tyle, du fichier source et du fichier résultat) s'effectue dans des scripts serveurs adaptés au système d'exploitation qui héberge le code (celui-ci étant auto-détecté par le script Python) : sur Linux le script shell run_saxon.sh est mobilisé, sous Windows le script batch run_saxon.bat.
+
+L'appel au batch ou au shell est piloté depuis le fichier execute_workflow.py qui centralise l'essentiel des traitements (gestion des paramètres et organisation des phases intermédiaires de pré-traitements, notamment pour la source Full Text Finder), lui-même étant lancé depuis la ligne de commande ou le notebook avec ses 2 paramètres associés (-w et -f).
+
 
  ## Remarques générales sur le circuit complet de signalement pour les ebooks
 
@@ -66,17 +99,3 @@ stateDiagram
  Pour voir la doc détaillée des workflow source par source : [https://wiki.univ-cotedazur.fr/display/SCDSIGB/Ebooks+dans+Primo](https://wiki.univ-cotedazur.fr/display/SCDSIGB/Ebooks+dans+Primo)
 
 
-## Remarques générales sur le circuit complet de signalement pour les revues en ligne (source FTF)
-
-*Les feuilles de style dédiées sont dans le dossier /atoz du repositery.*
-
-1. Downloader les métadonnées depuis l'admin de FTF en renseignant le formulaire d'export ainsi
-2. Déposer le fichier atoz_export.txt dans HOME/atoz/temp_processing_files
-3. Ouvrir HOME/atoz/temp_processing_files/atoz_preprocessing.xslx
-    - Onglet développeur -> Macros : faire tourner les 3 macros de step1 à step3
-    - ou si l'export mappé en xml ne fonctionne pas, faire le mapping manuellement à partir du mappage XMl déjà présent dans Source + exporter
-4. nommer l'export xml atoz_preprocessing.xml et le déposer dans HOME/atoz/temp_processing_files
-5. Avec le jar saxon9he (se placer dans Kernow/lib) lancer en ligne de commande 
-```
-java -jar "C:\Program Files\Kernow 1.8.0.1\lib\saxon9he.jar" -s:C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\temp_processing_files\atoz_export.xml -xsl:C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\xslt\atoztemp4primo.xsl -o:C:\Users\BUNICE\Documents\GitHub\XSLT_signalement_docelec\atoz\result_files\atoz.xml
-```
