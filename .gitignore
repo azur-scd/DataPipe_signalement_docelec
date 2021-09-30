@@ -1,5 +1,5 @@
-source_files_files/*
-temporary_files/*
-result_files/*
+result_files/**
+source_files/**
+temporary_files/**
 venv_signalement
 .ipynb_checkpoints
