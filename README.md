@@ -37,6 +37,8 @@ virtualenv NOM_DE_VOTRE_ENV # créé un environnement virtuel
 
 #### Activation sous Windows
 
+**Important : décommenter les lignes correspondant aux packages pywin32 et pywinpty (spécifiques Windows) dans requirements.txt**
+
 ```
 cd NOM_DE_VOTRE_ENV/Scripts
 activate # active l'environnement virtuel
