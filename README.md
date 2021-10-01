@@ -2,7 +2,7 @@
 
 Ce répertoire contient les différentes feuilles de style XSLT utilisées pour alimenter l'Opac (Primo) avec des  métadonnées de documentation électroniques, ainsi que les fonctions et méthodes python nécessaires à leur exécution. 
 
-Ces scripts de data preprocessing qui permettent d'automatiser sous forme de de pipe de données les phases manuelles de mise en forme des métadonnées pour Primo peuvent être lancés en CLI (ligne de commande) ou depuis une UI sommaire dans le Jupyter Noptebook execute_workflow.ipynb.
+Ces scripts de data preprocessing qui permettent d'automatiser sous forme de de pipe de données les phases manuelles de mise en forme des métadonnées pour Primo peuvent être lancés en CLI (ligne de commande) ou depuis une UI sommaire dans le Jupyter Noptebook execute_workflow_ui.ipynb.
  
 Ce pipe est accessible depuis si-scd.unice.fr pour une utilisation distante ou être installé en local sur son PC (Windows)
 
@@ -16,11 +16,18 @@ Voir [cette page](https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Environnem
 
 ## Download
 
-Télécharger l'archive zippée ou cloner le dépôt depuis Github.
+- Télécharger l'archive zippée ou cloner le dépôt depuis Github.
 
-Installer le dossier dans un emplacement du serveur accessible en écriture
+- Installer le dossier dans un emplacement du serveur accessible en écriture
+
+- Si besoin mettre l'utilisateur scd en propriétaire du folder 
+```  
+sudo chown -R scd:scd DataPipe_signalement_docelec
+```
 
 ## Virtualenv
+
+Si besoin, installer le package virtualenv (pip install virtualenv)
 
 Se placer à la racine du dossier et lancer les commandes :
 
