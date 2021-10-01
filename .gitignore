@@ -6,3 +6,4 @@ temporary_files/*
 !temporary_files/.gitkeep
 venv_signalement
 .ipynb_checkpoints
+__pycache__
