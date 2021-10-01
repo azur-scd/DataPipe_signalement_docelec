@@ -1,5 +1,8 @@
-result_files/*.*
-source_files/*.*
-temporary_files/*.*
+result_files/*
+source_files/*
+temporary_files/*
+!result_files/.gitkeep 
+!source_files/.gitkeep
+!temporary_files/.gitkeep
 venv_signalement
 .ipynb_checkpoints
