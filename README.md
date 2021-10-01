@@ -1,16 +1,25 @@
-# XSLT_signalement_docelec
- Ce répertoire contient les différentes feuilles de style XSLT utilisées pour alimenter l'Opac (Primo) avec diverses sources de métadonnées de documentation électroniques.
- 
- L'ensemble des traitements appliqués aux fichiers source de métadonnées (nettoyage, conversion xsl) sont exécutables dans le Jupyter Noptebook execute_workflow.ipynb ou être lancés en ligne de commande.
+# DataHub_signalement_docelec
 
-Les sources de données ayant donné lieu au paramétrage de pipes de moissonnage spécifiques et nécessitant un workflow de traitement en amont sont :
+Ce répertoire contient les différentes feuilles de style XSLT utilisées pour alimenter l'Opac (Primo) avec des  métadonnées de documentation électroniques, ainsi que les fonctions et méthodes python nécessaires à leur exécution. 
+
+Ces scripts de data preprocessing qui permettent d'automatiser sous forme de de pipe de données les phases manuelles de mise en forme des métadonnées pour Primo peuvent être lancés en CLI (ligne de commande) ou depuis une UI sommaire dans le Jupyter Noptebook execute_workflow.ipynb.
+
+Les diverses sources de données concernées sont :
  - FTF : les métadonnées de revues électroniques (plus qqs bouquets d'ebooks) gérées dans Full Text Finder (Ebsco)
  - Cairn : les métadonnées d'ebooks du bouquet QSJ + les acquiisitions au titre à titre
  - Cyberlibris : les métadonnées d'ebooks du bouquet Cyberlibris
  - Numilog : les acquisitions d'ebooks au titre à titre sur la plateforme Numilog
  - Springer bouquet Math & stats : les métadonnées d'ebooks des bouquets annuels Springer Math & stat (achat LJAD).
  
-Installé sur dev-scd.unice.fr pour une utilisation distante mais peut être installé en local sur son PC (Windows)
+**Important** : du fait de la diversité des sources de métadonnées (FTF & éditeurs) et de leurs modalités de récupération, les pipes ne gèrent pas leur moissonnage dynamique à la source, les fichiers doivent être préalablement récupérés sur les interfaces dédiées et déposés dans HOME/source_files/
+ 
+Ce sous-ensemble du DataHub SCD peut être actionné depuis si-csd.unice.fr pour une utilisation distante ou être installé en local sur son PC (Windows)
+
+## Installation sur si-scd.unice.fr
+
+L'environnement python ainsi que les scripts sont déjà installés et prêts à l'usage sur le serveur.
+
+cf voir cette page du wiki pour installer Anaconda sur l'OS Centos 7
 
 ## Installation locale
 
@@ -40,9 +49,10 @@ pip install -r ../../requirements.txt # installe toutes les dépendances
 
 #### Dépôt du fichier de métadonnées à moissonner
 
-Déposer le fichier source (issu de FTF ou Cairn ou Cyberlibris...) dans le dossier HOME/source_files/ (libellé du fichier indifférent)
+Déposer le fichier source (issu de FTF ou Cairn ou Cyberlibris...) dans le dossier HOME/source_files/ (libellé du fichier indifférent).
+A l'issue de l'excution de chaque pipe, le fichier résultat est automatiquement déposé dans HOME/result_files/
 
-*Sur si-scd.unice.fr le chemin est /home/scd/DataHub_signalement_docelec/source-files/*
+*Sur si-scd.unice.fr les chemins respectifs sont /home/scd/DataHub_signalement_docelec/source_files/ et /home/scd/DataHub_signalement_docelec/result_files/*
 
 #### CLI
 
@@ -64,10 +74,12 @@ python execute_workflow.py -w:numilog -f:numilog.xml
 
 En plus de la CLI, les workflows peuvent être lancés depuis un formulaire construit avec des ipwidgets dans le Jupyter Notebook execute_workflow_ui.ipynb, ou encore depuis une mini-UI générée en surcouche du notebook grâce au package Voila.
 
-Pour ouvrir le notebook : passer par le navigateur Anaconda, lancer l'application Jupyter Lab et naviguer dans l'explorateur de fichier pour retrouver l'emplacement du notebokk (une fois ouvert et si besoin, changer le kernel actif)
+Pour ouvrir le notebook : passer par le navigateur Anaconda, lancer l'application Jupyter Lab et naviguer dans l'explorateur de fichier pour retrouver l'emplacement du notebokk (une fois ouvert et si besoin, changer le kernel actif en se connectant à son environnement virtuel)
 
 - notebook
 - voila
+
+*Sur si-scd.unice.fr l'url du notebook est...*
 
 ### Fonctionnement
 
@@ -75,7 +87,9 @@ Les différentes feuilles de style tournent avec le processeur XSLT Saxon instal
 
 L'appel au processeur Saxon avec les différents paramètres de fichiers en fonction des workfloxs (paths des feuilles de tyle, du fichier source et du fichier résultat) s'effectue dans des scripts serveurs adaptés au système d'exploitation qui héberge le code (celui-ci étant auto-détecté par le script Python) : sur Linux le script shell run_saxon.sh est mobilisé, sous Windows le script batch run_saxon.bat.
 
-L'appel au batch ou au shell est piloté depuis le fichier execute_workflow.py qui centralise l'essentiel des traitements (gestion des paramètres et organisation des phases intermédiaires de pré-traitements, notamment pour la source Full Text Finder), lui-même étant lancé depuis la ligne de commande ou le notebook avec ses 2 paramètres associés (-w et -f).
+L'appel au batch ou au shell est piloté depuis le fichier execute_workflow.py qui centralise l'essentiel des traitements (gestion des paramètres et organisation des phases intermédiaires de pré-traitements, notamment pour la source Full Text Finder), en récupérant les 2 paramètres associés à la commande de lancement (-w et -f).
+
+L'exécution depuis le notebook suis le même enchainement et actionne les mêmes scripts, en apportant "seulement" une couche plus user friendly sous forme de formulaire composé de widgets pour donner une accès en mode "non-expert".
 
 
  ## Remarques générales sur le circuit complet de signalement pour les ebooks
