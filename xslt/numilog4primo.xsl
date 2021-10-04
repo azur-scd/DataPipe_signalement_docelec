@@ -1,4 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--Title : conversion expor Numilog en Unimarc "natif" en Unimarc compatible Primo-->
+<!-- Author : EC puis GG-->
+<!-- Last release : juillet 2021-->
+<!-- Desciption : : 
+1. namespaces et en-têtes OAI
+l2. l'isbn (papier) du champ 010 est parfois préfixé _ : correction
+3. les notices fournies par Numilog ne contiennent pas d'indexation sujets → récupération des champs 606 des notices papiers du Sudoc
+4. proxification de l'url en 856
+5. éventuellement dans le fichier produit en sortie, supprimer les attributs de namespace xmlns=""
+-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:marc="http://www.loc.gov/MARC21/slim"
                 xmlns="http://www.openarchives.org/OAI/2.0/"

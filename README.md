@@ -18,9 +18,9 @@ Voir [cette page](https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Environnem
 
 - Télécharger l'archive zippée ou cloner le dépôt depuis Github.
 
-- Installer le dossier dans un emplacement du serveur accessible en écriture
+- Installer le dossier dans un emplacement du serveur ou du PC accessible en écriture
 
-- Si besoin mettre l'utilisateur scd en propriétaire du folder 
+- serveur Linux : si besoin mettre l'utilisateur scd en propriétaire du folder 
 ```  
 sudo chown -R scd:scd DataPipe_signalement_docelec
 ```
@@ -29,7 +29,7 @@ sudo chown -R scd:scd DataPipe_signalement_docelec
 
 Si besoin, installer le package virtualenv (pip install virtualenv)
 
-Se placer à la racine du dossier et lancer les commandes :
+Se placer à la racine du dossier et lancer la commande :
 
 ```
 virtualenv NOM_DE_VOTRE_ENV # créé un environnement virtuel
