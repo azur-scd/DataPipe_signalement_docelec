@@ -59,6 +59,9 @@
             <ResourceId>
                <xsl:value-of select="KBID"/>
             </ResourceId>
+            <Source>
+              <xsl:value-of select="$source"/>
+            </Source>
             <!--new xml entry-->
             <ManagedCoverage>
                <xsl:variable name="start">
@@ -101,6 +104,7 @@
   <xsl:template match="ManagedCoverageEnd"/>
   <xsl:template match="index"/>
   <xsl:template match="KBID"/>
+  <xsl:template match="PackageName"/>
   
    <!--common template to manage date format-->
   <xsl:template name="coverage">
