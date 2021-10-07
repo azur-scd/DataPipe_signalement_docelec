@@ -25,8 +25,7 @@ atoz_cols_to_remove = ['Edition','Editor', 'Illustrator', 'DOI', 'PeerReviewed',
        'CreateCustom', 'HideOnPublicationFinder', 'Delete',
        'OrderedThroughEBSCO', 'IsCustom', 'UserDefinedField1',
        'UserDefinedField2', 'UserDefinedField3', 'UserDefinedField4',
-       'UserDefinedField5', 'PackageType', 'AllowEbscoToAddNewTitles',
-       'Unnamed: 40']
+       'UserDefinedField5', 'PackageType', 'AllowEbscoToSelectNewTitles','Unnamed: 40']
 
 def file_path(relative_path):
     folder = os.path.dirname(os.path.abspath("__file__"))
