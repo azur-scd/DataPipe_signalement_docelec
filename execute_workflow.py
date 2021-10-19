@@ -37,7 +37,7 @@ def exec_w(**kwargs):
     """
     Parameters
     ----------
-    workflow : str, possible values are atoz|cairn_qsj|cairn_titre_a_titre|cyberlibris|numilog
+    workflow : str, possible values are ftf|cairn_qsj|cairn_titre_a_titre|cyberlibris|numilog
     filename : str, name of the data source file (.csv or .xml) in the HOME/source-files/ folder
     """
     workflow=kwargs.get('workflow')
