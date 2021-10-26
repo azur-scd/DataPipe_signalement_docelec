@@ -49,7 +49,14 @@ pip install -r ../../requirements.txt # installe toutes les dépendances
 
 ```
 source NOM_DE_VOTRE_ENV/bin/activate
-pip install -r requirements.txt # installe toutes les dépendances
+cd NOM_DE_VOTRE_ENV/bin
+python3 -m pip install -r requirements.txt # installe toutes les dépendances
+```
+
+#### Rendre accessible l'environnement virtuel dans le kernel des notebooks
+
+```
+ipython kernel install --user --name=NOM_DE_VOTRE_ENV
 ```
 
 ## Usage
