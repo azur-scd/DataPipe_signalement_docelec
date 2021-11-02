@@ -14,7 +14,13 @@ jobs:
     
       - name: Check Out Repo 
         uses: actions/checkout@v2
-        
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
@@ -33,7 +39,7 @@ jobs:
         with:
           file: Dockerfile
           push: true
-          tags: gegedenice/datapipe-signalement-docelec:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/datapipe-signalement-docelec:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
