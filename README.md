@@ -86,6 +86,10 @@ docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8
 Le commit et le push sur la branche main du repo actionne automatiquement une Github action de build et de push de la nouvelle image sur le Docker Hub.
 (Le fichier de configuration du workflow est dans ...)
 
+## Synthèse
+
+
+
 
  
 
