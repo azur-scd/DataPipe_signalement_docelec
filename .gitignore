@@ -4,6 +4,11 @@ temporary_files/*
 !result_files/.gitkeep 
 !source_files/.gitkeep
 !temporary_files/.gitkeep
-venv_signalement
-.ipynb_checkpoints
+# Ignore virtual env folder#
+###################
+**/*venv*/**
+
+# Ignore archived version of notebooks and python stuffs #
+###################
+*.ipynb_checkpoints
 __pycache__
