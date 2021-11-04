@@ -3,8 +3,9 @@ USER root
 RUN apt-get update
 RUN apt-get install -yq --no-install-recommends default-jdk
 ENV HOME=/home/jovyan
-USER $NB_UID
-RUN fix-permissions /home/$NB_USER
+USER jovyan
+#USER $NB_UID
+#RUN fix-permissions /home/$NB_USER
 COPY --chmod=777 . .
 RUN pip install -r linux_requirements.txt
 RUN rm -r $HOME/work/
