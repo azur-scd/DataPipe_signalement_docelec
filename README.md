@@ -79,12 +79,12 @@ Pour lancer le conteneur, il faut spécifier dans la commande :
 
 ```
 #Exemple
-docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8888:8888 -p 8889:8889 -p 8866:8866 -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/source_files:/home/jovyan/source_files -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/result_files:/home/jovyan/result_files gegedenice/datapipe-signalement-docelec:v0
+docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8888:8888 -p 8889:8889 -p 8866:8866 -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/source_files:/home/jovyan/source_files -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/result_files:/home/jovyan/result_files gegedenice/datapipe-signalement-docelec:latest
 ```
 ### CI Pipeline
 
 Le commit et le push sur la branche main du repo actionne automatiquement une Github action de build et de push de la nouvelle image sur le Docker Hub.
-(Le fichier de configuration du workflow est dans ...)
+(Le fichier de configuration du workflow est dans .github/workflows)
 
 ## Synthèse
 
