@@ -14,4 +14,4 @@ VOLUME ["/home/jovyan/result_files","/home/jovyan/source_files"]
 #CMD ["jupyter","notebook"]
 #CMD jupyter notebook --NotebookApp.token='123456'
 #CMD ["voila","execute_workflow_ui.ipynb"]
-CMD voila execute_worflow_ui.ipynb --VoilaConfiguration.file_whitelist="['.*.(xml|csv)']"
+CMD voila execute_workflow_ui.ipynb --VoilaConfiguration.file_whitelist="['.*.(xml|csv)']"
