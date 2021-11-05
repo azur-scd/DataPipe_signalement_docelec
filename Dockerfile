@@ -6,7 +6,7 @@ ENV HOME=/home/jovyan
 USER jovyan
 #USER $NB_UID
 #RUN fix-permissions /home/$NB_USER
-COPY --chmod=777 . .
+COPY --chown=jovyan --chmod=777 . .
 RUN pip install -r linux_requirements.txt
 RUN rm -r $HOME/work/
 WORKDIR $HOME
