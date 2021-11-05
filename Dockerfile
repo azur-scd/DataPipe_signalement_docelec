@@ -1,17 +1,11 @@
-FROM jupyter/minimal-notebook:latest
-USER root
-RUN apt-get update
-RUN apt-get install -yq --no-install-recommends default-jdk
-ENV HOME=/home/jovyan
-USER jovyan
-#USER $NB_UID
-#RUN fix-permissions /home/$NB_USER
-COPY --chown=jovyan --chmod=777 . .
+FROM gegedenice/base-notebook-java-userscd:latest
+ENV HOME=/home/scd
+USER scd
+COPY --chmod=777 . .
 RUN pip install -r linux_requirements.txt
-RUN rm -r $HOME/work/
 WORKDIR $HOME
 EXPOSE 8866 8888 8889
-VOLUME ["/home/jovyan/result_files","/home/jovyan/source_files"]
+VOLUME ["/home/scd/result_files","/home/scd/source_files"]
 #CMD ["jupyter","notebook"]
 #CMD jupyter notebook --NotebookApp.token='123456'
 #CMD ["voila","execute_workflow_ui.ipynb"]
