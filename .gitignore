@@ -12,3 +12,5 @@ temporary_files/*
 ###################
 *.ipynb_checkpoints
 __pycache__
+
+init.dockerfile

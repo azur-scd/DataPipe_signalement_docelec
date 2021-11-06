@@ -8,3 +8,4 @@
 __pycache__
 
 win_requirements.txt
+init.dockerfile
