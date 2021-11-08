@@ -7,4 +7,4 @@ WORKDIR $HOME
 EXPOSE 8866
 VOLUME ["/home/scd/result_files","/home/scd/source_files"]
 #ENTRYPOINT ["sh","-c", "jupyter notebook --notebook-dir=/home/scd --ip=0.0.0.0 --no-browser --allow-root --port=8888 --NotebookApp.token='123456' --NotebookApp.base_url='/datapipe-signalement-docelec'"]
-CMD voila execute_workflow_ui.ipynb --VoilaConfiguration.file_whitelist="['.*.(xml|csv)']"
+CMD voila execute_workflow_ui.ipynb --Voila.base_url='/datapipe-signalement-docelec/' --VoilaConfiguration.file_whitelist="['.*.(xml|csv)']"
