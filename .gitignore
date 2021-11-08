@@ -11,6 +11,6 @@ temporary_files/*
 # Ignore archived version of notebooks and python stuffs #
 ###################
 *.ipynb_checkpoints
-__pycache__
+*.__pycache__
 
 init.dockerfile
