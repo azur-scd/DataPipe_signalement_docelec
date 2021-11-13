@@ -1,13 +1,23 @@
 # DataPipe_signalement_docelec
 
-Ce répertoire contient les différentes feuilles de style XSLT utilisées pour alimenter l'Opac (Primo) avec des  métadonnées de documentation électroniques, ainsi que les fonctions et méthodes python nécessaires à leur exécution. L'ensemble du dispositif a pour but à la fois d'automatiser sous forme de de pipe de données les phases manuelles de mise en forme des métadonnées pour Primo, et à la fois de permettre des installations et des accès multiples (en local via la CLI, en local via un Jupyter notebook ou une UI Voila activé dans un environnement virtuel, en local via un conteneur Docker, en version conteneurisée déployée sur le serveur distant si-scd).
+Ce répertoire contient les différentes feuilles de style XSLT utilisées pour alimenter l'Opac (Primo) avec des  métadonnées de documentation électroniques, ainsi que les fonctions et méthodes python nécessaires à leur exécution. 
+L'ensemble du dispositif a pour but d'automatiser sous forme de de pipe de données les phases (jusqu'ici manuelles) de mise en forme des métadonnées pour Primo, et d'utiliser pour ce faire l'environnement python des notebooks Jupyter permettant à la fois d'exécuter et documenter le code au même endroit.
 
-## Installation locale (Windows)
+Il répond également à un objectif d'ouverture et de "démocratisation" de l'accès au différents workflows, autant du point de vue de leurs exécutions que de celui de leur développement. Pour ce faire, le code est structuré  de manière à pouvoir permettre des installations et des accès multiples :
+- installation du code source en local 
+ - exécution via la CLI
+ - accès et exécution via un Jupyter notebook
+ - accès et exécution via une UI basique générée avec la librairie Voila qui convertit le notebook en app web interactive
+- installation du conteneur Docker en local
+ - accès et exécution via l'UI Voila
+- accès distant partagé au conteneur Docker installé sur dev-scd
+ - accès et exécution via l'UI Voila
+
+## Code source : installation locale (Windows)
 
 ### Pré-requis
 
 Python v3 et environnement Anaconda pour ouvrir le notebook
-
 
 ### Download
 
@@ -15,7 +25,7 @@ Python v3 et environnement Anaconda pour ouvrir le notebook
 
 - Installer le dossier dans un emplacement du serveur ou du PC accessible en écriture
 
-### Virtualenv
+### Environnement virtuel
 
 - Si besoin, installer le package virtualenv (pip install virtualenv)
 
@@ -35,19 +45,23 @@ pip install -r ../../win_requirements.txt # installe toutes les dépendances
  ```
  ipython kernel install --user --name=NOM_DE_VOTRE_ENV
  ```
+- Lancer le notebook
+ - en ligne de commande : 
+ - avec Anaconda Navigator
 
+- Lancer l'app web Voila
+ - en lige de commande : voila
+ - depuis le notebook
 
-## Utilisation en local
+### Utilisation (exécution des workflows)
 
-### Documentation complète
+La documentation utilisateur complète se trouve sur le wiki [https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec](https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec)
 
-[https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec](https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec)
-
-### Dans le notebook
+#### Dans le notebook ou 
 
 - Avec l'application Notebook ou Jupyter de la suite Anaconda (accessibles avec Anaconda Navigator)
 
-### En CLI
+#### En CLI
 
 ```
 #Exemples
@@ -55,13 +69,32 @@ python execute_workflow.py -w:ftf -f:ftf_source_records.csv
 python execute_workflow.py -w:numilog -f:numilog.xml
 ```
 
-## Utilisation en production
+## Conteneur Docker : installation en local (Windows)
 
-Sur le serveur distant si-scd, le paramétrage du pipe est rendu dans une mini app web servie grâce à Voila (package permettant de convertir à la volée des Jupyter notebooks en pages html).
+### Pré-requis
 
-Le code du pipe est déployé au sein d'un conteneur Docker, dont l'image est accessible librement sur le registre Docker Hub
+Docker Desktop pour Windows installé
 
-[https://hub.docker.com/repository/docker/gegedenice/datapipe-signalement-docelec](https://hub.docker.com/repository/docker/gegedenice/datapipe-signalement-docelec)
+### Download et utilisation
+
+L'image du conteneur est accessible depuis le Docker registry à cette adresse : [https://hub.docker.com/repository/docker/gegedenice/datapipe-signalement-docelec](https://hub.docker.com/repository/docker/gegedenice/datapipe-signalement-docelec)
+
+Une seule commande suffit à récupérer l'image et lancer le conteneur, en précisant en argument le mapping du port 8866 écouté à l'intérieur du conteneur ainsi que l'emplacement des répertoires du PC local à binder sur ceux du conteneur
+
+```
+#Exemple
+docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/source_files:/home/scd/source_files -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/result_files:/home/scd/result_files gegedenice/datapipe-signalement-docelec:latest
+```
+L'application est accessible en local sur http://localhost:<PORT>/datapipe-signalement-docelec
+
+## Conteneur Docker en production : accès partagé
+
+En production l'application est déployée au sein d'un conteneur Docker installé et configuré sur le serveur dev-scd.unice.fr
+
+Url d'accès : http://dev-scd.unice.fr/datapipe-signalement-docelec
+
+Sur le répertoire de fichier du serveur distant, le dossier /home/scd/DataStore/datapipe_signalement_docelec sert de volume bindé avec le dossier /home/scd/ du conteneur. C'est donc dans /home/scd/DataStore/datapipe_signalement_docelec/source_files/ qu'il faut déposer en SSH les fichiers source de métadonnées, et éventuellement (bien que les fichiers résultats soient téléchargeables depuis l'interface web) dans /home/scd/DataStore/datapipe_signalement_docelec/result_files/ qu'on peut récupérer les fichiers préts à e^ter chargés dans Primo.
+
 
 ## Développement
 
@@ -71,7 +104,7 @@ Docker installé
 
 ### Méthodo
 
-Les devs se font dans une installation locale du repo, et l'assemblage au sein d'un conteneur Docker peut être testé grâce au fichier descripteur Dockerfile.
+Les devs se font dans une installation locale du repo, et l'assemblage final au sein d'un conteneur Docker peut être testé grâce au fichier descripteur Dockerfile.
 Pour lancer le conteneur, il faut spécifier dans la commande :
 
 - le mapping des ports (argument -p)
