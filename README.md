@@ -46,7 +46,7 @@ pip install -r ../../win_requirements.txt # installe toutes les dépendances
  ipython kernel install --user --name=NOM_DE_VOTRE_ENV
  ```
 - Lancer le notebook
-  - en ligne de commande : 
+  - en ligne de commande : jupyter notebook workflow_ui.ipynb
   - avec Anaconda Navigator
 
 - Lancer l'app web Voila
@@ -56,18 +56,6 @@ pip install -r ../../win_requirements.txt # installe toutes les dépendances
 ### Focntionnement (exécution des workflows)
 
 La documentation utilisateur complète se trouve sur le wiki [https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec](https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec)
-
-#### Dans le notebook ou 
-
-- Avec l'application Notebook ou Jupyter de la suite Anaconda (accessibles avec Anaconda Navigator)
-
-#### En CLI
-
-```
-#Exemples
-python execute_workflow.py -w:ftf -f:ftf_source_records.csv
-python execute_workflow.py -w:numilog -f:numilog.xml
-```
 
 ## Conteneur Docker : installation en local (Windows)
 
