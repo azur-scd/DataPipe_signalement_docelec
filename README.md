@@ -83,18 +83,11 @@ Une seule commande suffit à récupérer l'image et lancer le conteneur, en pré
 
 ```
 #Exemple
-docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -p 8888:8888 -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/source_files:/home/scd/source_files -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/result_files:/home/scd/result_files gegedenice/datapipe-signalement-docelec:latest
+docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -p 8888:8888 -v C:/Users/user/Docker_examples/source_files:/home/scd/source_files -v C:/Users/user/Docker_examples/result_files:/home/scd/result_files gegedenice/datapipe-signalement-docelec:latest
 ```
-*Personnaliser le path C:/Users/geoffroy/Docker/DataPipe-signalement-docelec par votre propre path*
+*Personnaliser le path C:/Users/user/Docker_examples par votre propre path*
+
 L'application est accessible en local sur http://localhost:<PORT>/datapipe-signalement-docelec
-
-## Conteneur Docker en production : accès partagé
-
-En production l'application est déployée au sein d'un conteneur Docker installé et configuré sur le serveur dev-scd.unice.fr
-
-Url d'accès : http://dev-scd.unice.fr/datapipe-signalement-docelec
-
-Sur le répertoire de fichier du serveur distant, le dossier /home/scd/DataStore/datapipe_signalement_docelec sert de volume bindé avec le dossier /home/scd/ du conteneur. C'est donc dans /home/scd/DataStore/datapipe_signalement_docelec/source_files/ qu'il faut déposer en SSH les fichiers source de métadonnées, et éventuellement (bien que les fichiers résultats soient téléchargeables depuis l'interface web) dans /home/scd/DataStore/datapipe_signalement_docelec/result_files/ qu'on peut récupérer les fichiers préts à e^ter chargés dans Primo.
 
 
 
