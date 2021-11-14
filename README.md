@@ -46,7 +46,7 @@ pip install -r ../../win_requirements.txt # installe toutes les dépendances
  ipython kernel install --user --name=NOM_DE_VOTRE_ENV
  ```
 - Lancer le notebook
-  - en ligne de commande : 
+  - en ligne de commande : jupyter notebook workflow_ui.ipynb
   - avec Anaconda Navigator
 
 - Lancer l'app web Voila
