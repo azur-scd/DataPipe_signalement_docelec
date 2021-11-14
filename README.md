@@ -5,13 +5,13 @@ L'ensemble du dispositif a pour but d'automatiser sous forme de de pipe de donn�
 
 Il répond également à un objectif d'ouverture et de "démocratisation" de l'accès au différents workflows, autant du point de vue de leurs exécutions que de celui de leur développement. Pour ce faire, le code est structuré  de manière à pouvoir permettre des installations et des accès multiples :
 - installation du code source en local 
- - exécution via la CLI
- - accès et exécution via un Jupyter notebook
- - accès et exécution via une UI basique générée avec la librairie Voila qui convertit le notebook en app web interactive
+  - exécution via la CLI
+  - accès et exécution via un Jupyter notebook
+  - accès et exécution via une UI basique générée avec la librairie Voila qui convertit le notebook en app web interactive
 - installation du conteneur Docker en local
- - accès et exécution via l'UI Voila
+  - accès et exécution via l'UI Voila
 - accès distant partagé au conteneur Docker installé sur dev-scd
- - accès et exécution via l'UI Voila
+  - accès et exécution via l'UI Voila
 
 ## Code source : installation locale (Windows)
 
@@ -46,14 +46,14 @@ pip install -r ../../win_requirements.txt # installe toutes les dépendances
  ipython kernel install --user --name=NOM_DE_VOTRE_ENV
  ```
 - Lancer le notebook
- - en ligne de commande : 
- - avec Anaconda Navigator
+  - en ligne de commande : 
+  - avec Anaconda Navigator
 
 - Lancer l'app web Voila
- - en lige de commande : voila
- - depuis le notebook
+  - en lige de commande : voila
+  - depuis le notebook
 
-### Utilisation (exécution des workflows)
+### Focntionnement (exécution des workflows)
 
 La documentation utilisateur complète se trouve sur le wiki [https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec](https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec)
 
@@ -83,8 +83,9 @@ Une seule commande suffit à récupérer l'image et lancer le conteneur, en pré
 
 ```
 #Exemple
-docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/source_files:/home/scd/source_files -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/result_files:/home/scd/result_files gegedenice/datapipe-signalement-docelec:latest
+docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -p 8888:8888 -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/source_files:/home/scd/source_files -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/result_files:/home/scd/result_files gegedenice/datapipe-signalement-docelec:latest
 ```
+*Personnaliser le path C:/Users/geoffroy/Docker/DataPipe-signalement-docelec par votre propre path*
 L'application est accessible en local sur http://localhost:<PORT>/datapipe-signalement-docelec
 
 ## Conteneur Docker en production : accès partagé
@@ -94,32 +95,6 @@ En production l'application est déployée au sein d'un conteneur Docker install
 Url d'accès : http://dev-scd.unice.fr/datapipe-signalement-docelec
 
 Sur le répertoire de fichier du serveur distant, le dossier /home/scd/DataStore/datapipe_signalement_docelec sert de volume bindé avec le dossier /home/scd/ du conteneur. C'est donc dans /home/scd/DataStore/datapipe_signalement_docelec/source_files/ qu'il faut déposer en SSH les fichiers source de métadonnées, et éventuellement (bien que les fichiers résultats soient téléchargeables depuis l'interface web) dans /home/scd/DataStore/datapipe_signalement_docelec/result_files/ qu'on peut récupérer les fichiers préts à e^ter chargés dans Primo.
-
-
-## Développement
-
-### Pré-requis
-
-Docker installé
-
-### Méthodo
-
-Les devs se font dans une installation locale du repo, et l'assemblage final au sein d'un conteneur Docker peut être testé grâce au fichier descripteur Dockerfile.
-Pour lancer le conteneur, il faut spécifier dans la commande :
-
-- le mapping des ports (argument -p)
-- quels dossiers locaux seront bindés avec ceux du conteneur (arguments -v)
-
-```
-#Exemple
-docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8888:8888 -p 8889:8889 -p 8866:8866 -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/source_files:/home/jovyan/source_files -v C:/Users/geoffroy/Docker/DataPipe-signalement-docelec/result_files:/home/jovyan/result_files gegedenice/datapipe-signalement-docelec:latest
-```
-### CI Pipeline
-
-Le commit et le push sur la branche main du repo actionne automatiquement une Github action de build et de push de la nouvelle image sur le Docker Hub.
-(Le fichier de configuration du workflow est dans .github/workflows)
-
-## Synthèse
 
 
 
