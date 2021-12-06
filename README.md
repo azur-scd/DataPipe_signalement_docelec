@@ -38,7 +38,7 @@ virtualenv NOM_DE_VOTRE_ENV # créé un environnement virtuel
 
 ```
 cd NOM_DE_VOTRE_ENV/Scripts & activate
-pip install -r ../../win_requirements.txt # installe toutes les dépendances
+pip install -r ../../requirements.txt # installe toutes les dépendances
 ```
 - Rendre accessible l'environnement virtuel dans le kernel des notebooks
   
@@ -53,7 +53,7 @@ pip install -r ../../win_requirements.txt # installe toutes les dépendances
   - en lige de commande : voila
   - depuis le notebook
 
-### Focntionnement (exécution des workflows)
+### Fonctionnement (exécution des workflows)
 
 La documentation utilisateur complète se trouve sur le wiki [https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec](https://wiki.univ-cotedazur.fr/display/SCDDeptSIDoc/Data+Pipe+Signalement+docelec)
 
@@ -65,13 +65,13 @@ Docker Desktop pour Windows installé
 
 ### Download et utilisation
 
-L'image du conteneur est accessible depuis le Docker registry à cette adresse : [https://hub.docker.com/repository/docker/gegedenice/datapipe-signalement-docelec](https://hub.docker.com/repository/docker/gegedenice/datapipe-signalement-docelec)
+L'image du conteneur est accessible depuis le Docker registry à cette adresse : [https://hub.docker.com/repository/docker/azurscd/datapipe-signalement-docelec](https://hub.docker.com/repository/docker/azurscd/datapipe-signalement-docelec)
 
 Une seule commande suffit à récupérer l'image et lancer le conteneur, en précisant en argument le mapping du port 8866 écouté à l'intérieur du conteneur ainsi que l'emplacement des répertoires du PC local à binder sur ceux du conteneur
 
 ```
 #Exemple
-docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -p 8888:8888 -v C:/Users/geoffroy/Documents/GitHub/DataPipe_signalement_docelec/source_files:/home/scd/source_files -v C:/Users/geoffroy/Documents/GitHub/DataPipe_signalement_docelec/result_files:/home/scd/result_files azurscd/datapipe-signalement-docelec:latest
+docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -p 8888:8888 -v C:/Users/geoffroy/Documents/GitHub/DataPipe_signalement_docelec/source_files:/home/scd/source_files -v C:/Users/geoffroy/Documents/GitHub/DataPipe_signalement_docelec/temporary_files:/home/scd/temporary_files -v C:/Users/geoffroy/Documents/GitHub/DataPipe_signalement_docelec/result_files:/home/scd/result_files azurscd/datapipe-signalement-docelec:latest
 ```
 *Personnaliser le path C:/Users/user/Docker_examples par votre propre path*
 
