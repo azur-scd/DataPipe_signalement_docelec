@@ -71,7 +71,7 @@ Une seule commande suffit à récupérer l'image et lancer le conteneur, en pré
 
 ```
 #Exemple
-docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -p 8888:8888 -v C:/Users/user/Docker_examples/source_files:/home/scd/source_files -v C:/Users/user/Docker_examples/result_files:/home/scd/result_files gegedenice/datapipe-signalement-docelec:latest
+docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8866:8866 -p 8888:8888 -v C:/Users/geoffroy/Documents/GitHub/DataPipe_signalement_docelec/source_files:/home/scd/source_files -v C:/Users/geoffroy/Documents/GitHub/DataPipe_signalement_docelec/result_files:/home/scd/result_files azurscd/datapipe-signalement-docelec:latest
 ```
 *Personnaliser le path C:/Users/user/Docker_examples par votre propre path*
 
