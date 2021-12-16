@@ -77,7 +77,16 @@ docker run --name datapipe-signalement-docelec -e JUPYTER_ENABLE_LAB=yes -d -p 8
 
 L'application est accessible en local sur http://localhost:<PORT>/datapipe-signalement-docelec
 
+### Développement
 
+* Mise à jour de l'image de base : voir la maj de [https://github.com/azur-scd/base-notebook-java-userscd](https://github.com/azur-scd/base-notebook-java-userscd)
+
+* Rebuild de l'image et push sur le Docker hub pour mise à jour
+
+```
+docker build -t azurscd/datapipe-signalement-docelec:latest .
+docker push azurscd/datapipe-signalement-docelec:latest
+```
 
 
  
