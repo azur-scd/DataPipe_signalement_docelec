@@ -74,7 +74,14 @@ def exec_w(**kwargs):
             print(subprocess.run([file_path('run_saxon.bat'),file_path('xslt/cairn_titre_a_titre4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cairn_tat_result_'+filename)], shell=True, check=True, capture_output=True))
         if os_platform == 'Linux':
             print(subprocess.run(['/bin/bash','./run_saxon.sh',file_path('xslt/cairn_titre_a_titre4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cairn_tat_result_'+filename)]))
-        print("...End processing")       
+        print("...End processing") 
+
+    if workflow == 'cyberlibris':
+        if os_platform == 'Windows':
+            print(subprocess.run([file_path('run_saxon.bat'),file_path('xslt/cyberlibris4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cyberlibris_result_'+filename)], shell=True, check=True, capture_output=True))
+        if os_platform == 'Linux':
+            print(subprocess.run(['/bin/bash','./run_saxon.sh',file_path('xslt/cyberlibris4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cyberlibris_result_'+filename)]))
+        print("...End processing")		
         
 def main(*args):
     arg_w = None
