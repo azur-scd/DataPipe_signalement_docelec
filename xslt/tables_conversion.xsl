@@ -527,6 +527,22 @@
 		<AccessType>0</AccessType>
 		<Note>Accès sur mot de passe à demander à bu-sciences[at]univ-cotedazur.fr (réservé aux membres de l'université)</Note>
 	</entry>
+	<entry>
+		<Title>Clinic : La Revue De L'Omnipraticien</Title>
+		<Source>Publisher's site</Source>
+		<PrintISSN>1254-3136</PrintISSN>
+		<OnlineISSN>1290-3604</OnlineISSN>
+		<AccessType>0</AccessType>
+		<Note>Accès sur mot de passe à demander à bu-medecine[at]univ-cotedazur.fr (réservé aux membres de l'université)</Note>
+	</entry>
+	<entry>
+		<Title>Les Cahiers de Prothèse</Title>
+		<Source>Publisher's site</Source>
+		<PrintISSN>0397-1643</PrintISSN>
+		<OnlineISSN>1290-3612</OnlineISSN>
+		<AccessType>0</AccessType>
+		<Note>Accès sur mot de passe à demander à bu-medecine[at]univ-cotedazur.fr (réservé aux membres de l'université)</Note>
+	</entry>
 </xsl:variable>
 
 </xsl:stylesheet>
