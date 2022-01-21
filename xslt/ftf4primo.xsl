@@ -54,10 +54,10 @@
          </LinkId>
          -->
             <LinkId>
-               <xsl:value-of select="KBID"/>
+               <xsl:value-of select="index + 1"/>
             </LinkId>
             <ResourceId>
-                <xsl:value-of select="index + 1"/>
+                <xsl:value-of select="KBID"/>
             </ResourceId>
             <Source>
               <xsl:value-of select="$source"/>
