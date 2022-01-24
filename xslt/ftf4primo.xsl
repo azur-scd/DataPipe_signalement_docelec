@@ -58,7 +58,7 @@
             </LinkId>
             <ResourceId>
                 <!--<xsl:value-of select="KBID"/>-->
-                <xsl:value-of select="concat(KBID,substring($source,1,4))"/>
+                <xsl:value-of select="concat(KBID,substring(translate($source, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),1,4))"/>
             </ResourceId>
             <Source>
               <xsl:value-of select="$source"/>
