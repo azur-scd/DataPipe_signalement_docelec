@@ -6,7 +6,8 @@
                 xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd"
 	exclude-result-prefixes="marc">
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
-		<xsl:param name="provider">Cairn</xsl:param>
+    <xsl:param name="provider_prefixe">cairn</xsl:param>
+		<xsl:param name="provider_suffixe">tat</xsl:param>
 	<xsl:template match="/*">
 	 <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -19,10 +20,10 @@
         <xsl:variable name="ppn">
               <xsl:value-of select="document(concat('https://www.sudoc.fr/services/isbn2ppn/', $isbn))//result/ppn[last()]"/>
             </xsl:variable>
-        <xsl:variable name="id" select="concat($provider, '-', $isbn, '-', position())"/>
+       <xsl:variable name="id" select="concat($provider_prefixe, replace($isbn,'-',''), $provider_suffixe)"/>
           <record>
          <header>
-            <identifier><xsl:value-of select="$provider"/>-publish:<xsl:value-of select="$id"/>
+            <identifier><xsl:value-of select="$provider_prefix"/>-publish:<xsl:value-of select="$id"/>
             </identifier>
          </header>
          <metadata>

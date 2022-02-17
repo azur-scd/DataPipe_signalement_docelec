@@ -50,7 +50,7 @@ pip install -r ../../requirements.txt # installe toutes les dépendances
   - avec Anaconda Navigator
 
 - Lancer l'app web Voila
-  - en lige de commande : voila
+  - en ligne de commande : voila
   - depuis le notebook
 
 ### Fonctionnement (exécution des workflows)

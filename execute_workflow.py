@@ -18,7 +18,7 @@ import lxml
 splitchar = ":"
 os_platform = platform.system()
 
-w_options = ['ftf', 'cairn_qsj', 'cairn_titre_a_titre', 'cyberlibris', 'numilog']
+w_options = ['ftf', 'cairn_titre_a_titre', 'cairn_qsj', 'cairn_couperin', 'cyberlibris', 'numilog']
 atoz_cols_to_remove = ['Edition','Editor', 'Illustrator', 'DOI', 'PeerReviewed','CustomCoverageBegin',
        'CustomCoverageEnd', 'CoverageStatement', 'Embargo', 'CustomEmbargo',
        'Description', 'Subject', 'PackageContentType',
@@ -74,6 +74,20 @@ def exec_w(**kwargs):
             print(subprocess.run([file_path('run_saxon.bat'),file_path('xslt/cairn_titre_a_titre4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cairn_tat_result_'+filename)], shell=True, check=True, capture_output=True))
         if os_platform == 'Linux':
             print(subprocess.run(['/bin/bash','./run_saxon.sh',file_path('xslt/cairn_titre_a_titre4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cairn_tat_result_'+filename)]))
+        print("...End processing") 
+
+    if workflow == 'cairn_qsj':
+        if os_platform == 'Windows':
+            print(subprocess.run([file_path('run_saxon.bat'),file_path('xslt/cairn_qsj4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cairn_qsj_result_'+filename)], shell=True, check=True, capture_output=True))
+        if os_platform == 'Linux':
+            print(subprocess.run(['/bin/bash','./run_saxon.sh',file_path('xslt/cairn_qsj4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cairn_sqj_result_'+filename)]))
+        print("...End processing")
+
+    if workflow == 'cairn_couperin':
+        if os_platform == 'Windows':
+            print(subprocess.run([file_path('run_saxon.bat'),file_path('xslt/cairn_couperin4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cairn_couperin_result_'+filename)], shell=True, check=True, capture_output=True))
+        if os_platform == 'Linux':
+            print(subprocess.run(['/bin/bash','./run_saxon.sh',file_path('xslt/cairn_couperin4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/cairn_couperin_result_'+filename)]))
         print("...End processing") 
 
     if workflow == 'cyberlibris':
