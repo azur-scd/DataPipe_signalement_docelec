@@ -35,7 +35,7 @@
     <record>
          <header>
          <identifier>
-            <xsl:value-of select="lower-case($provider_prefix)"/>-publish:<xsl:value-of select="$id"/>
+            <xsl:value-of select="lower-case($provider_prefixe)"/>-publish:<xsl:value-of select="$id"/>
             </identifier>
          </header>
          <metadata>
