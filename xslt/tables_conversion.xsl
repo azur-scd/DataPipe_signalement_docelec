@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:variable name="standard">
 <entry>
@@ -467,6 +467,14 @@
 		<Title>L'Officiel juridique du sport</Title>
 		<Source>Publisher's Site</Source>
 		<PrintISSN>1244-8389</PrintISSN>
+		<OnlineISSN/>
+		<AccessType>0</AccessType>
+		<Note>Accès sur mot de passe à demander à bu-sciences[at]univ-cotedazur.fr (réservé aux membres de l'université)</Note>
+	</entry>
+		<entry>
+		<Title>Pour la Science</Title>
+		<Source>Publisher's Site</Source>
+		<PrintISSN>0153-4092</PrintISSN>
 		<OnlineISSN/>
 		<AccessType>0</AccessType>
 		<Note>Accès sur mot de passe à demander à bu-sciences[at]univ-cotedazur.fr (réservé aux membres de l'université)</Note>
