@@ -59,8 +59,6 @@ pyparsing==3.0.7
 pyrsistent==0.18.1
 python-dateutil==2.8.2
 pytz==2022.1
-pywin32==301
-pywinpty==1.1.4
 pyzmq==22.3.0
 requests==2.27.1
 requests-unixsocket==0.3.0
