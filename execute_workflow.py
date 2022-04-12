@@ -18,7 +18,7 @@ import lxml
 splitchar = ":"
 os_platform = platform.system()
 
-w_options = ['ftf', 'cairn_titre_a_titre', 'cairn_qsj', 'cairn_couperin', 'cyberlibris', 'numilog', 'lextenso']
+w_options = ['ftf', 'cairn_titre_a_titre', 'cairn_qsj', 'cairn_couperin', 'cyberlibris', 'numilog', 'lextenso', 'biblioondemand']
 atoz_cols_to_remove = ['Edition','Editor', 'Illustrator', 'DOI', 'PeerReviewed','CustomCoverageBegin',
        'CustomCoverageEnd', 'CoverageStatement', 'Embargo', 'CustomEmbargo',
        'Description', 'Subject', 'PackageContentType',
@@ -37,7 +37,7 @@ def exec_w(**kwargs):
     """
     Parameters
     ----------
-    workflow : str, possible values are ftf|cairn_qsj|cairn_titre_a_titre|cairn_couperin|cyberlibris|numilog|lextenso
+    workflow : str, possible values are ftf|cairn_qsj|cairn_titre_a_titre|cairn_couperin|cyberlibris|numilog|lextenso|biblioondemand
     filename : str, name of the data source file (.csv or .xml) in the HOME/source-files/ folder
     """
     workflow=kwargs.get('workflow')
@@ -45,7 +45,7 @@ def exec_w(**kwargs):
     
     # check some verifs
     if str(workflow) not in w_options:
-        print("Error in workflow argument value, authorized values are : ftf|cairn_qsj|cairn_titre_a_titre|cairn_couperin|cyberlibris|numilog|lextenso")
+        print("Error in workflow argument value, authorized values are : ftf|cairn_qsj|cairn_titre_a_titre|cairn_couperin|cyberlibris|numilog|lextenso|biblioondemand")
     elif not(file_path('source_files/'+filename)):
         print("Error in source filename path : check if file exists in the /source_files/ folder, or if the given name is correct")
     else:
@@ -102,6 +102,13 @@ def exec_w(**kwargs):
             print(subprocess.run([file_path('run_saxon.bat'),file_path('xslt/lextenso4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/lextenso_result_'+filename)], shell=True, check=True, capture_output=True))
         if os_platform == 'Linux':
             print(subprocess.run(['/bin/bash','./run_saxon.sh',file_path('xslt/lextenso4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/lextenso_result_'+filename)]))
+        print("...End processing")
+
+    if workflow == 'biblioondemand':
+        if os_platform == 'Windows':
+            print(subprocess.run([file_path('run_saxon.bat'),file_path('xslt/biblioondemand4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/biblioondemand_result_'+filename)], shell=True, check=True, capture_output=True))
+        if os_platform == 'Linux':
+            print(subprocess.run(['/bin/bash','./run_saxon.sh',file_path('xslt/biblioondemand4primo.xsl'),file_path('source_files/'+filename),file_path('result_files/biblioondemand_result_'+filename)]))
         print("...End processing")		
         
 def main(*args):
